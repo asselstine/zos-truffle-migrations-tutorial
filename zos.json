@@ -1,0 +1,9 @@
+{
+  "zosversion": "2",
+  "name": ".",
+  "version": "0.1.0",
+  "contracts": {
+    "Migrations": "Migrations",
+    "CallMeMaybe": "CallMeMaybe"
+  }
+}

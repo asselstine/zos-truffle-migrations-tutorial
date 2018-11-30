@@ -110,7 +110,9 @@ const shell = require('shelljs')
 
 module.exports = function(deployer, networkName, accounts) {
   deployer.then(() => {
-    shell.exec(`zos create Migrations --init initialize --args ${accounts[0]} --network ${networkName} --from ${accounts[1]}`)
+    if (shell.exec(`zos create Migrations --init initialize --args ${accounts[0]} --network ${networkName} --from ${accounts[1]}`).code !== 0) {
+      throw new Error('Migration failed')
+    }
   })
 };
 ```
@@ -131,8 +133,8 @@ import "openzeppelin-eth/contracts/ownership/Ownable.sol";
 contract CallMeMaybe is Ownable {
   string public name;
 
-  function init(string _name) public initializer {
-    Ownable.initialize(msg.sender);
+  function init(address _owner, string _name) public initializer {
+    Ownable.initialize(_owner);
     name = _name;
   }
 
@@ -150,7 +152,9 @@ const shell = require('shelljs')
 
 module.exports = function(deployer, networkName, accounts) {
   deployer.then(() => {
-    shell.exec(`zos create CallMeMaybe --init init --args ${accounts[0]},maybe --network ${networkName} --from ${accounts[1]}`)
+    if (shell.exec(`zos create CallMeMaybe --init init --args ${accounts[0]},maybe --network ${networkName} --from ${accounts[1]}`).code !== 0) {
+      throw new Error('Migration failed')
+    }
   })
 };
 ```
@@ -161,7 +165,7 @@ const CallMeMaybe = artifacts.require('CallMeMaybe.sol')
 
 module.exports = function(deployer, networkName, accounts) {
   deployer.then(async () => {
-    const instance = CallMeMaybe.deployed()
+    const instance = await CallMeMaybe.deployed()
     await instance.setName('or not')
   })
 };

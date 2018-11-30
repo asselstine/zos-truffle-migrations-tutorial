@@ -1,0 +1,19 @@
+{
+  "name": "zos-truffle-migrations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ganache-cli": "^6.2.3",
+    "openzeppelin-eth": "^2.0.2",
+    "shelljs": "^0.8.3",
+    "truffle-hdwallet-provider": "0.0.6",
+    "zos": "^2.0.1",
+    "zos-truffle-merge": "0.0.3"
+  }
+}
