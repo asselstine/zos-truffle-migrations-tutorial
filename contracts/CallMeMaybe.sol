@@ -13,7 +13,7 @@ contract CallMeMaybe is Ownable {
     name = _name;
   }
 
-  function setName(string _newName) public {
+  function setName(string _newName) public onlyOwner {
     name = _newName;
   }
 }
